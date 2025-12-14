@@ -1,0 +1,104 @@
+1. O "Prompt Mestre" (Copie e guarde isso)
+Use este texto para "setar" a minha personalidade e o escopo do projeto sempre que for trabalhar nele:
+
+Role: Atue como um Tech Lead Sênior de Dados e Analytics. Eu sou um Analista Júnior/Pleno desenvolvendo um projeto de portfólio complexo sobre o Setor Elétrico Brasileiro.
+
+O Projeto: "Monitor de Risco Hidrológico e Impacto Financeiro (FP&A)". Objetivo: Analisar a correlação entre Nível de Reservatórios (ONS), Preço da Energia (PLD/Tarifa) e Resultados Financeiros de empresas listadas (Margem Bruta/Dívida). Inclui um modelo preditivo de PLD.
+
+Stack Tecnológica:
+
+Linguagem: Python (Pandas, Numpy, Requests, Selenium, Scikit-learn).
+
+Visualização: Power BI (e Matplotlib/Seaborn para EDA).
+
+Fontes de Dados: ONS (Dados Abertos), CCEE, ANEEL, B3 (yfinance/CVM), Banco Central (SGS), EPE.
+
+Regras de Interação (IMPORTANTE):
+
+Não me dê o código pronto de imediato. Quero aprender a lógica. Quando eu travar, me dê dicas, explique o conceito ou forneça o esqueleto/pseudocódigo. Só escreva a solução completa se eu pedir explicitamente ou estiver muito errado.
+
+Me desafie com perguntas de negócio (ex: "Como você trataria a diferença de datas entre os dados semanais do PLD e diários da Bolsa?").
+
+Foque em boas práticas de Engenharia de Dados (ETL robusto) e Storytelling Financeiro.
+
+2. Roadmap de Execução do Projeto
+Dividi em 5 "Sprints" para você não se perder.
+
+Fase 1: Coleta e Ingestão (ETL)
+Onde a "mágica" técnica acontece. O objetivo é ter tabelas limpas.
+
+Onde Coletar:
+
+ONS: Baixar histórico de EAR (Energia Armazenada) do subsistema SE/CO (Sudeste/Centro-Oeste).
+
+CCEE: Baixar histórico do PLD (Preço de Liquidação das Diferenças).
+
+ANEEL: Baixar histórico de Bandeiras Tarifárias.
+
+Bibliotecas: pandas (leitura de csv/excel), requests (se for usar API), BeautifulSoup ou Selenium (se precisar raspar site).
+
+Perguntas a responder nesta fase:
+
+"Como padronizar as datas? O ONS reporta por dia, a CCEE por semana e a ANEEL por mês. Qual será minha 'chave primária' de tempo?" (Dica: Resample mensal).
+
+"Como lidar com dados faltantes (nulls)?"
+
+Fase 2: Enriquecimento Financeiro & Macro
+Adicionando a camada de "Business".
+
+Onde Coletar:
+
+Yahoo Finance (yfinance): Cotações (ELET3, CPFE3, TAEE11) e Dados Contábeis (Receita, Custo, Dívida).
+
+Banco Central (API SGS): Histórico da SELIC e IPCA.
+
+EPE: Consumo Industrial de Energia.
+
+Perguntas a responder:
+
+"Preciso deflacionar os valores financeiros de 2020 para comparar com 2025 ou analiso nominalmente?"
+
+"Quais contas da DRE (Demonstrativo de Resultado) são mais sensíveis à seca?"
+
+Fase 3: Análise Exploratória e Visualização (Power BI)
+Transformando dados em informação.
+
+Ferramentas: Power BI (Dashboard final) ou Seaborn/Matplotlib (Rascunho rápido no Python).
+
+O que analisar (Hipóteses):
+
+Correlação Física: "Existe lag (atraso) entre o reservatório cair e o PLD subir?"
+
+Correlação Financeira: "A Margem Bruta da Eletrobras cai na mesma proporção que o PLD sobe?"
+
+Impacto Social: "Quanto tempo demora para a crise hídrica virar Bandeira Vermelha na conta de luz?"
+
+KPIs Essenciais: Margem Operacional %, Nível de EAR %, PLD Médio (R$/MWh), Custo da Dívida (Selic).
+
+Fase 4: Machine Learning (Preditivo)
+A "cereja do bolo" para Data Science.
+
+O que fazer: Criar um modelo para prever o PLD Médio do próximo mês.
+
+Bibliotecas: scikit-learn.
+
+Modelo: Random Forest Regressor (Comece simples).
+
+Features (Variáveis X): Mês, Reservatório Atual, Chuva Prevista (se tiver), PLD anterior, Consumo Industrial.
+
+Target (Variável Y): PLD Futuro.
+
+Métrica de Sucesso: MAE (Mean Absolute Error) - "Meu modelo erra, em média, R$ 20,00 o preço."
+
+Fase 5: Documentação e Portfólio
+O que vende seu peixe.
+
+README do GitHub: Não poste só código. Escreva como se fosse um relatório executivo.
+
+Contexto do Problema (Risco Hidrológico no Brasil).
+
+Solução Técnica (Pipeline Python + ML).
+
+Insights de Negócio (O que você descobriu sobre a margem das empresas).
+
+LinkedIn: Grave um vídeo curto da tela do Power BI mostrando a "história" da crise hídrica afetando o balanço da empresa.
